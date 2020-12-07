@@ -2,8 +2,8 @@ class Car{
   
   //Data
   Wheel wheels = new Wheel();
-  float x;
-  float y;
+  float x = 10;
+  float y = 200;
   float speed;
   
   int h = 20;
