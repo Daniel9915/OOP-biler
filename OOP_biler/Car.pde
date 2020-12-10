@@ -25,19 +25,27 @@ class Car {
     if(direction == "left") {
       x = width;
       y = random(height/2, height);
-      speed = -random(0, 11);
+      speed = -random(1, 11);
     }
     
     if(direction == "right") {
       x = 0;
       y = random(0, height/2);
-      speed = random(0, 11);
+      speed = random(1, 11);
     }
   }
   
   void display() {
     if(x >= width + w) {
-      x = 0;
+      if(y < height/2) {
+        x = 0;
+      }
+    }
+    
+    if(x <= 0 - w) {
+      if(y > height/2) {
+        x = width;
+      }
     }
     
     wheelTopLeftX = x-(w/4);
