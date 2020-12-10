@@ -1,42 +1,49 @@
-
-
-int maxCars = 10000;
-Car car[] = new Car[maxCars];
-int carNumb;  //Number of cars made
-boolean[] carIsMade = new boolean[maxCars];
+Car[] allCars = new Car[1000];
+int carNum = 0; 
 
 void setup() {
   rectMode(CENTER);
+  textAlign(CENTER);
   size(600,600);
-  createCarClasses();
+  fill(0);
+  text("Klik på en af halvdelene af skærmen i den lodrette retning", width/2, height/2);
 }
 
 void draw() {
   clear();
   background(255);
-  createCars();
 
+  showCars();
 }
 
-
-void keyPressed(){
-    if(key=='A'||key=='a'){
-      carNumb++;
-      carIsMade[carNumb] = true;
-    }
-}
-
-void createCars(){
-  for(int i = 0; i < car.length; i++){ // Draws all cars currently made
-    if(carIsMade[i] == true){
-      car[i].display();
-      car[i].drive();
-    }
+void mousePressed() {
+  clear();
+  background(255);
+  
+  if(mouseY > height/2) {
+    addCarLeft();
+  }
+  
+  if(mouseY < height/2) {
+    addCarRight();
   }
 }
 
-void createCarClasses(){              //Creates objects for all cars
-  for(int i=0; i<car.length; i++){
-    car[i] = new Car(5,color(50,random(200,255),random(200,255))); // speed, color
+void addCarRight() {
+  allCars[carNum] = new Car("right");
+  carNum++;
+}
+
+void addCarLeft() {
+  allCars[carNum] = new Car("left");
+  carNum++;
+}
+
+void showCars() {
+  for(int i = 0; i < allCars.length; i++) {
+    if(allCars[i] != null) {
+      allCars[i].display();
+      allCars[i].drive();
+    }
   }
 }
